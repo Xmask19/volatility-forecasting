@@ -382,7 +382,7 @@ Conventional EWMA and historical variance provide additional benchmarks.
 Root mean squared error provides a complementary evaluation:
 
 ```math
-\operatorname{RMSE}
+\mathrm{RMSE}
 =
 \sqrt{
 \frac1N
