@@ -30,57 +30,57 @@ The objective is to evaluate forecasting performance and understand the sources 
 
 Assuming zero conditional mean returns, GARCH(1,1) is defined by
 
-$$
+```math
 r_t=\sigma_tz_t,
 \qquad z_t\sim N(0,1),
-$$
+```
 
-$$
+```math
 \sigma_{t+1}^2
 =
 \omega+\alpha r_t^2+\beta\sigma_t^2,
-$$
+```
 
 where the innovations are independent and standardised.
 
 For the stationary specification considered here,
 
-$$
+```math
 \omega>0,\qquad
 \alpha,\beta\ge0,\qquad
 \alpha+\beta<1.
-$$
+```
 
 The long-run unconditional variance is
 
-$$
+```math
 \bar{\sigma}^2
 =
 \frac{\omega}{1-\alpha-\beta}.
-$$
+```
 
 EWMA instead follows
 
-$$
+```math
 \sigma_{t+1}^2
 =
 (1-\lambda)r_t^2+\lambda\sigma_t^2,
 \qquad 0<\lambda<1.
-$$
+```
 
 This is equivalent to the parameter restrictions
 
-$$
+```math
 \omega=0,\qquad
 \alpha=1-\lambda,\qquad
 \beta=\lambda,
-$$
+```
 
 which imply
 
-$$
+```math
 \alpha+\beta=1.
-$$
+```
 
 EWMA therefore lies on the integrated boundary rather than within the stationary GARCH parameter space. Nevertheless, a fitted stationary GARCH model may approach this boundary closely.
 
@@ -88,38 +88,38 @@ EWMA therefore lies on the integrated boundary rather than within the stationary
 
 Let
 
-$$
+```math
 \rho=\alpha+\beta
-$$
+```
 
-denote GARCH persistence, and let \(v_t\) represent its one-step-ahead variance forecast at time \(t\).
+denote GARCH persistence, and let $v_t$ represent its one-step-ahead variance forecast at time $t$.
 
-The expected conditional variance \(j\) trading days ahead is
+The expected conditional variance $j$ trading days ahead is
 
-$$
+```math
 E_t[\sigma_{t+j}^2]
 =
 \bar{\sigma}^2+
 \rho^{j-1}(v_t-\bar{\sigma}^2).
-$$
+```
 
-Consequently, the cumulative variance forecast over \(h\) trading days is
+Consequently, the cumulative variance forecast over $h$ trading days is
 
-$$
+```math
 \widehat V_{t,h}^{\mathrm{GARCH}}
 =
 h\bar{\sigma}^2+
 (v_t-\bar{\sigma}^2)
 \frac{1-\rho^h}{1-\rho}.
-$$
+```
 
 Under EWMA, the corresponding forecast is
 
-$$
+```math
 \widehat V_{t,h}^{\mathrm{EWMA}}
 =
 h v_t^{\mathrm{EWMA}}.
-$$
+```
 
 GARCH allows expected variance to revert towards a long-run level, whereas EWMA maintains the current expected daily variance over the forecast horizon.
 
@@ -153,17 +153,17 @@ The published returns are expressed in percentage points.
 
 Daily simple market returns are constructed as
 
-$$
+```math
 R_t
 =
 \frac{(Mkt-RF)_t+RF_t}{100},
-$$
+```
 
 with log returns defined by
 
-$$
+```math
 r_t=\log(1+R_t).
-$$
+```
 
 The analysis uses decimal log returns throughout.
 
@@ -179,22 +179,22 @@ Three models form the core empirical comparison.
 
 Rolling historical variance estimates the current daily variance from recent squared returns:
 
-$$
+```math
 \widehat{\sigma}_t^2
 =
 \frac1n
 \sum_{i=0}^{n-1}r_{t-i}^2.
-$$
+```
 
 The primary reference uses a 20-trading-day window, approximately one trading month.
 
 Assuming constant expected daily variance over the forecast horizon,
 
-$$
+```math
 \widehat V_{t,h}
 =
 h\widehat{\sigma}_t^2.
-$$
+```
 
 A 60-day window provides a secondary sensitivity comparison.
 
@@ -202,31 +202,31 @@ A 60-day window provides a secondary sensitivity comparison.
 
 EWMA estimates conditional variance recursively:
 
-$$
+```math
 \widehat{\sigma}_{t+1}^2
 =
 \lambda\widehat{\sigma}_t^2
 +
 (1-\lambda)r_t^2.
-$$
+```
 
 Two specifications are considered.
 
 **Conventional EWMA** uses the daily RiskMetrics decay parameter
 
-$$
+```math
 \lambda=0.94.
-$$
+```
 
 **Calibrated EWMA** uses a decay parameter selected from validation-period forecasting performance.
 
 The five-day cumulative forecast is
 
-$$
+```math
 \widehat V_{t,5}
 =
 5\widehat{\sigma}_{t+1}^2.
-$$
+```
 
 The conventional model provides a fixed reference, while the calibrated model forms the principal comparison against GARCH.
 
@@ -242,11 +242,11 @@ Multi-period forecasts are calculated using the fitted recursion.
 
 The estimated persistence,
 
-$$
+```math
 \widehat{\rho}
 =
 \widehat{\alpha}+\widehat{\beta},
-$$
+```
 
 and implied long-run variance are of particular interest because they characterise the model's estimated mean-reverting behaviour.
 
@@ -256,17 +256,17 @@ and implied long-run variance are of particular interest because they characteri
 
 The EWMA decay parameter is selected by minimising five-day QLIKE loss over the validation sample.
 
-For a forecast originating at the close of day \(t\), realised variance over the next five trading days is
+For a forecast originating at the close of day $t$, realised variance over the next five trading days is
 
-$$
+```math
 RV_{t,5}
 =
 \sum_{j=1}^{5}r_{t+j}^2.
-$$
+```
 
 The calibrated parameter is
 
-$$
+```math
 \lambda^*
 =
 \arg\min_{\lambda\in\Lambda}
@@ -277,19 +277,19 @@ $$
 +
 \frac{RV_{t,5}}{\widehat V_{t,5}(\lambda)}
 \right],
-$$
+```
 
 where
 
-$$
+```math
 \Lambda=\{0.900,0.905,\ldots,0.990\}.
-$$
+```
 
 Calibration uses non-overlapping five-trading-day validation targets, matching the primary evaluation horizon and loss function.
 
 EWMA variance estimates continue to update daily, using information available at each forecast origin.
 
-The selected value of \(\lambda^*\) remains fixed during the final test period.
+The selected value of $\lambda^*$ remains fixed during the final test period.
 
 ### 5.2 Sample division
 
@@ -333,27 +333,27 @@ Differences between fitted one-step variance estimates and multi-step forecast d
 
 The intended forecasting quantity is cumulative conditional variance over the horizon:
 
-$$
+```math
 V^*_{t,h}
 =
 E_t\left[
 \sum_{j=1}^{h}\sigma_{t+j}^2
 \right].
-$$
+```
 
 Under the zero conditional mean assumption and appropriate moment conditions,
 
-$$
+```math
 E_t[RV_{t,h}]=V^*_{t,h},
-$$
+```
 
 where
 
-$$
+```math
 RV_{t,h}
 =
 \sum_{j=1}^{h}r_{t+j}^2.
-$$
+```
 
 Realised variance therefore provides an observable but noisy proxy for the underlying forecasting target.
 
@@ -361,11 +361,11 @@ Realised variance therefore provides an observable but noisy proxy for the under
 
 Forecast accuracy is assessed primarily using
 
-$$
+```math
 L_{\mathrm{QLIKE}}(\widehat V,RV)
 =
 \log(\widehat V)+\frac{RV}{\widehat V}.
-$$
+```
 
 Forecast variances are strictly positive.
 
@@ -381,14 +381,14 @@ Conventional EWMA and historical variance provide additional benchmarks.
 
 Root mean squared error provides a complementary evaluation:
 
-$$
+```math
 \operatorname{RMSE}
 =
 \sqrt{
 \frac1N
 \sum_t(\widehat V_t-RV_t)^2
 }.
-$$
+```
 
 Unlike QLIKE, RMSE places greater emphasis on large absolute variance forecast errors.
 
@@ -400,23 +400,23 @@ One-day results are reported separately from the primary five-day comparison.
 
 For each five-day forecast period, the paired QLIKE loss difference is
 
-$$
+```math
 d_t
 =
 L_{\mathrm{GARCH},t}
 -
 L_{\mathrm{EWMA},t}.
-$$
+```
 
 The primary hypotheses are
 
-$$
+```math
 H_0:E[d_t]=0,
-$$
+```
 
-$$
+```math
 H_1:E[d_t]\ne0.
-$$
+```
 
 A negative mean difference favours GARCH, while a positive difference favours EWMA.
 
@@ -488,17 +488,17 @@ Simulations are particularly useful because the underlying conditional variance 
 
 The first scenario generates returns from a stationary GARCH(1,1) process:
 
-$$
+```math
 r_t=\sigma_tz_t,
-$$
+```
 
-$$
+```math
 \sigma_{t+1}^2
 =
 \omega+\alpha r_t^2+\beta\sigma_t^2,
 \qquad
 \alpha+\beta<1.
-$$
+```
 
 The generating process has a positive long-run variance and genuine mean reversion.
 
@@ -510,11 +510,11 @@ The experiment examines whether the correctly specified GARCH model produces mor
 
 The second scenario uses an integrated variance process:
 
-$$
+```math
 \sigma_{t+1}^2
 =
 0.94\sigma_t^2+0.06r_t^2.
-$$
+```
 
 This represents a process with EWMA dynamics rather than mean reversion towards a positive long-run variance.
 
@@ -530,13 +530,13 @@ The simulations use separate estimation and evaluation observations, with repeat
 
 The known conditional-variance process permits direct evaluation against
 
-$$
+```math
 V^*_{t,h}
 =
 E_t\left[
 \sum_{j=1}^{h}\sigma_{t+j}^2
 \right],
-$$
+```
 
 as well as against realised squared returns.
 
