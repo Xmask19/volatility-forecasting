@@ -1,0 +1,45 @@
+
+# ----------------------------------------
+# Financial data
+# ----------------------------------------
+# Original source data and derived observations
+# are kept locally, not redistributed.
+/data/raw/
+/data/processed/
+
+# ----------------------------------------
+# Python
+# ----------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ----------------------------------------
+# Test coverage
+# ----------------------------------------
+.coverage
+htmlcov/
+
+# ----------------------------------------
+# Jupyter
+# ----------------------------------------
+.ipynb_checkpoints/
+
+# ----------------------------------------
+# Local configuration and secrets
+# ----------------------------------------
+.env
+.env.*
+!.env.example
+
+# ----------------------------------------
+# Editor and operating system
+# ----------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
