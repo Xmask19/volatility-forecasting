@@ -1,0 +1,11 @@
+Synthetic Fama/French-format CSV fixture; not real financial data.
+For testing volatility-forecasting/src/prepare_returns.py only.
+Mkt-RF, SMB, HML and RF values are daily percentage points.
+
+,Mkt-RF,SMB,HML,RF
+19991230, 0.15, 0.02, 0.01, 0.02
+19991231,-0.10,-0.01, 0.02, 0.02
+20000103,-0.71, 0.55,-1.31, 0.02
+20000104,-4.06, 0.01, 0.03, 0.02
+20000105, 0.50, 0.02, 0.01, 0.01
+Copyright 2026 synthetic test fixture (no Kenneth French data)
