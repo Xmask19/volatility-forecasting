@@ -31,12 +31,17 @@ def load_market_returns(path):
 
 
 if __name__ == "__main__":
-    df = load_market_returns(
-        "volatility-forecasting/data/raw/F-F_Research_Data_Factors_daily.csv")
+    from pathlib import Path
 
-    print(df.head())
-    print(df.tail())
-    print(df.shape)
-    print(df.columns)
-    print(df.dtypes)
-    print(df[["simple_return", "log_return"]].describe())
+    root = Path(__file__).resolve().parents[1]
+
+    source = root / "data/raw/F-F_Research_Data_Factors_daily.csv"
+    output = root / "data/processed/market_returns.csv"
+
+    df = load_market_returns(source)
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(output, index=False)
+
+    print(f"Saved {len(df)} observations to {output}")
+    print(f"Date range: {df['Date'].min()} to {df['Date'].max()}")
