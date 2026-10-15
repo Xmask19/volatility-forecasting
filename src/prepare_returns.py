@@ -1,5 +1,6 @@
 import pandas as pd
 from math import log1p, isfinite
+from pathlib import Path
 
 
 def load_market_returns(path):
@@ -31,7 +32,7 @@ def load_market_returns(path):
 
 
 if __name__ == "__main__":
-    from pathlib import Path
+
 
     root = Path(__file__).resolve().parents[1]
 
