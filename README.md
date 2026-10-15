@@ -36,6 +36,6 @@ The [research specification (v0.4)](docs/research-specification.md) describes th
 
 ## Project status
 
-**Initial research setup.** The research design has been documented and the source dataset obtained. Data-processing code, forecasting implementations, tests and empirical results have not yet been added. Reproduction instructions and findings will be included as the work progresses.
+**Initial research setup.** The research design has been documented and the source dataset obtained. Forecasting implementations, tests and empirical results have not yet been added. Reproduction instructions and findings will be included as the work progresses.
 
 This is a research project on **variance forecasting**, not return-direction prediction or a trading strategy.

@@ -6,7 +6,8 @@ def load_market_returns(path):
     df = pd.read_csv(path, skiprows=4, skipfooter=1, engine='python')
     df = df.rename(columns={"Unnamed: 0": "Date"})
     df["Date"] = pd.to_datetime(df["Date"].astype(str), format="%Y%m%d")
-    df = df.loc[df["Date"] >= "2000-01-01", ["Date", "Mkt-RF", "RF"]].copy()
+    df = df.loc[(df["Date"] >= "2000-01-01") & (df["Date"] < "2026-09-01"),
+                ["Date", "Mkt-RF", "RF"]].copy()
     df = df.reset_index(drop=True)
     df["simple_return"] = (df["Mkt-RF"] + df["RF"]) / 100
 
