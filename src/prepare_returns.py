@@ -33,7 +33,6 @@ def load_market_returns(path):
 
 if __name__ == "__main__":
 
-
     root = Path(__file__).resolve().parents[1]
 
     source = root / "data/raw/F-F_Research_Data_Factors_daily.csv"
