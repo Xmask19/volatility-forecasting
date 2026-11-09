@@ -2,34 +2,36 @@
 
 ## Source
 
-Kenneth R. French Data Library — Fama/French 3 Factors [Daily].
+The study uses [Fama/French 3 Factors [Daily]](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html) from the Kenneth R. French Data Library.
 
-https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
+- **Data vintage:** August 2026 CRSP, with observations through 31 August 2026.
+- **Research sample:** January 2000–August 2026.
+- **Required columns:** `Date`, `Mkt-RF`, `RF`.
 
-Official download:
-https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip
+Later downloads may contain revised historical observations.
 
-## Initial dataset
+## Data preparation
 
-- Source database: August 2026 CRSP
-- Available observations: 1 July 1926 – 31 August 2026
-- Intended research sample: January 2000 onwards
-- Required columns: Date, Mkt-RF, RF
-- Original filename: `F-F_Research_Data_Factors_daily.csv`
+Download [`F-F_Research_Data_Factors_daily_CSV.zip`](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip).
 
-Daily US market simple returns are calculated by adding Mkt-RF and RF, converting the published percentage values to decimals.
+Extract `F-F_Research_Data_Factors_daily.csv` into `data/raw/`.
 
-Daily log returns are calculated as:
+Run from the repository root:
 
-`log(1 + market_return)`
+```bash
+python -m src.prepare_returns
+```
 
-## Local file locations
+Output: `data/processed/market_returns.csv`.
 
-- `data/raw/` — original downloaded data
-- `data/processed/` — derived research data
+Both data directories are excluded from Git.
 
-These directories are excluded from Git.
+## Return construction
 
-The source and processed datasets are not redistributed. Scripts for downloading and processing the data will be added as implementation progresses.
+Daily simple market returns are calculated from the percentage-point values:
 
-Historical source data may be revised. The download date and source-file checksum should be recorded when the automated data pipeline is implemented.
+`simple_return = (Mkt-RF + RF) / 100`
+
+Daily log returns are then calculated as:
+
+`log_return = log(1 + simple_return)`

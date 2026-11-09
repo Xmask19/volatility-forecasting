@@ -36,3 +36,17 @@ def test_ewma_no_lookahead():
 
     # Forecast at index 20 must remain unchanged
     assert modified.iloc[20] == pytest.approx(original.iloc[20])
+
+
+def test_ewma_short_window():
+    df = pd.DataFrame({
+        "log_return": [0.01, -0.02, 0.03, -0.04]
+    })
+
+    forecast = ewma_forecast(df, window=3, horizon=5)
+    initial = (0.01**2 + 0.02**2 + 0.03**2) / 3
+    assert forecast.iloc[:2].isna().all()
+    assert forecast.iloc[2] == pytest.approx(5 * initial)
+
+    expected_next = 0.94 * initial + 0.06 * 0.04**2
+    assert forecast.iloc[3] == pytest.approx(5 * expected_next)

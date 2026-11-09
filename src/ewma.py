@@ -8,11 +8,11 @@ def ewma_forecast(
     window: int = 20,
     horizon: int = 5
 ) -> pd.Series:
-    initial_variance = df["log_return"].iloc[:20].pow(2).mean()
+    initial_variance = df["log_return"].iloc[:window].pow(2).mean()
     variance = pd.Series(float("nan"), index=df.index)
-    variance.iloc[19] = initial_variance
+    variance.iloc[window-1] = initial_variance
 
-    for i in range(20, len(df)):
+    for i in range(window, len(df)):
         variance.iloc[i] = (
             decay * variance.iloc[i-1] +
             (1 - decay) * df["log_return"].iloc[i]**2)
